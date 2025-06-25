@@ -1,26 +1,3 @@
-<?php
-    require_once 'ConexaoBD.php';
-    require_once 'PontoEletronico.php';
-    require_once 'PontoEletronicoDAO.php';
-
-    if (!isset($_SESSION['ponto'])) {
-        echo "Nenhuma informação de ponto encontrada.";
-        exit();
-    }
-
-    $ponto = $_SESSION['ponto'];
-    echo "<h2>Informações do Ponto</h2>";
-    echo "CPF: " . htmlspecialchars($ponto['cpf']) . "<br>";
-    echo "Data: " . $ponto['data'] . "<br>";
-    echo "Entrada Manhã: " . $ponto['entradaM'] . "<br>";
-    echo "Saída Manhã: " . $ponto['saidaM'] . "<br>";
-    echo "Entrada Tarde: " . $ponto['entradaV'] . "<br>";
-    echo "Saída Tarde: " . $ponto['saidaV'] . "<br>";
-    echo "Entrada Extra: " . $ponto['entradaEx'] . "<br>";
-    echo "Saída Extra: " . $ponto['saidaEx'] . "<br>";
-    echo "Salário do Dia: R$ " . $ponto['salario'];
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -133,6 +110,20 @@
       background-color: #f5f5f5;
     }
   </style>
+
+<?php
+    include_once 'ConexaoBD.php';
+    include_once 'PontoEletronico.php';
+    include_once 'PontoEletronicoDAO.php';
+
+    if (!isset($_SESSION['ponto'])) {
+        echo "Nenhuma informação de ponto encontrada.";
+        exit();
+    }
+
+    $ponto = $_SESSION['ponto'];   
+?>
+
 </head>
 <body>
   <div class="main">

@@ -1,6 +1,6 @@
 <?php 
-    require_once 'ConexaoBD.php';
-    require_once 'PontoEletronico.php';
+    include_once 'ConexaoBD.php';
+    include_once 'PontoEletronico.php';
     class PontoEletronicoDAO {
 
         private $pdo;
@@ -17,19 +17,16 @@
         
             // Se encontrou um registro
             if ($stmt->rowCount() > 0) {
-                $dados = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-                $ponto = new PontoEletronico();
-                $ponto->setCpf($dados['cpf']);
-                $ponto->setDataRegistro($dados['dataRegistro']);
-                $ponto->setHorarioEntradaM($dados['horarioEntradaM']);
-                $ponto->setHorarioSaidaM($dados['horarioSaidaM']);
-                $ponto->setHorarioEntradaV($dados['horarioEntradaV']);
-                $ponto->setHorarioSaidaV($dados['horarioSaidaV']);
-                $ponto->setHorarioEntradaEx($dados['horarioEntradaEx']);
-                $ponto->setHorarioSaidaEx($dados['horarioSaidaEx']);
-                $ponto->setSalarioDoDia($dados['salarioDoDia']);
-        
+                $dados = $stmt->fetchALL(PDO::FETCH_ASSOC);
+                //Array de Pontos
+                $ponto=[];
+
+                //foreach para colocar dados no array de ponto
+                foreach($dados as $linha){
+                    $p = new PontoEletronico($dados['cpf'],$dados['dataRegistro'],$dados['horarioEntradaM'],$dados['horarioSaidaM'],$dados['horarioEntradaV'],
+                    $dados['horarioSaidaV'],$dados['horarioEntradaEx'],$dados['horarioSaidaEx'],$dados['salarioDoDia'])
+                    array_push($ponto, $p);
+                }
                 return $ponto;
             } else {
                 return null; // CPF não encontrado
