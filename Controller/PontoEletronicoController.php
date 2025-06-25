@@ -1,7 +1,7 @@
 <?php 
-        include_once 'ConexaoBD.php';
-        include_once 'PontoEletronico.php';
-        include_once 'PontoEletronicoDAO.php';
+        include_once 'model/ConexaoBD.php';
+        include_once 'model/PontoEletronico.php';
+        include_once 'model/PontoEletronicoDAO.php';
 
         if (isset($_POST['cpf'])) {
             $cpf = $_POST['cpf'];

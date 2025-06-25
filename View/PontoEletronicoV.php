@@ -83,9 +83,9 @@
 </head>
 <body>
   <div class="container">
-    <img src="gsf.png" class="logo">
+    <img src="./gsf.png" class="logo">
     <div class="inputContainer">
-      <img src="usuario.png" class="icon">
+      <img src="./usuario.png" class="icon">
       <input type="text" placeholder="Digite seu CPF">
     </div>
     <div class="botoes">
