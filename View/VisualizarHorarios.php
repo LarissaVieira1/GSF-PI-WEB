@@ -148,7 +148,19 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody> 
+          <?php foreach ($ponto as $p): ?>
+            <tr>
+              <td><?= date('d/m/Y', strtotime($h['dataRegistro'])) ?></td>
+              <td><?= $p['horarioEntradaM'] ?? '-' ?></td>
+              <td><?= $p['horarioSaidaM'] ?? '-' ?></td>
+              <td><?= $p['horarioEntradaV'] ?? '-' ?></td>
+              <td><?= $p['horarioSaidaV'] ?? '-' ?></td>
+              <td><?= $p['horarioEntradaEx'] ?? '-' ?></td>
+              <td><?= $p['horarioSaidaEx'] ?? '-' ?></td>
+              <td><?= $p['salarioDoDia'] ?? '-' ?></td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>

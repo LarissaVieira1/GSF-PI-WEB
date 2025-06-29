@@ -24,7 +24,7 @@
                 'salario' => $ponto->getSalarioDoDia()
             ];
 
-                header("Location: VisualizarHorariosController.php");
+                header("Location: rota.php?pagina=VisualizarHorarios");
                 exit();
 
             } else {

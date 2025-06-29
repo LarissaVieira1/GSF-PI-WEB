@@ -9,5 +9,6 @@
     }
 
     $ponto = $_SESSION['ponto'];   
+    require 'view/VisualizarHorarios.php';
 ?>
 
