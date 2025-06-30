@@ -12,9 +12,9 @@ class ConexaoBD {
 
             try {
                 // Conectar ao banco com PDO
-                $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
+                self::$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
                 // Ativar o modo de erros
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             } catch (PDOException $e) {
                 echo "Erro ao conectar: " . $e->getMessage();

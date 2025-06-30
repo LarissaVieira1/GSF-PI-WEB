@@ -1,43 +1,43 @@
 <?php 
    class PontoEletronico {
     
-        private $cpf;
-        private $dataRegistro;
-        private $horarioEntradaM;
-        private $horarioSaidaM;
-        private $horarioEntradaV;
-        private $horarioSaidaV;
-        private $horarioEntradaEx;
-        private $horarioSaidaEx;
-        private $salarioDoDia;
+        private $Cpf;
+        private $DataRegistro;
+        private $HorarioEntradaM;
+        private $HorarioSaidaM;
+        private $HorarioEntradaV;
+        private $HorarioSaidaV;
+        private $HorarioEntradaEx;
+        private $HorarioSaidaEx;
+        private $SalarioDoDia;
 
         // Getters e Setters
-        public function getCpf() { return $this->cpf; }
-        public function setCpf($cpf) { $this->cpf = $cpf; }
+        public function getCpf() { return $this->Cpf; }
+        public function setCpf($Cpf) { $this->Cpf = $Cpf; }
 
-        public function getDataRegistro() { return $this->dataRegistro; }
-        public function setDataRegistro($data) { $this->dataRegistro = $data; }
+        public function getDataRegistro() { return $this->DataRegistro; }
+        public function setDataRegistro($DataRegistro) { $this->DataRegistro = $DataRegistro; }
 
-        public function getHorarioEntradaM() { return $this->horarioEntradaM; }
-        public function setHorarioEntradaM($hora) { $this->horarioEntradaM = $hora; }
+        public function getHorarioEntradaM() { return $this->HorarioEntradaM; }
+        public function setHorarioEntradaM($HorarioEntradaM) { $this->HorarioEntradaM = $HorarioEntradaM; }
 
-        public function getHorarioSaidaM() { return $this->horarioSaidaM; }
-        public function setHorarioSaidaM($hora) { $this->horarioSaidaM = $hora; }
+        public function getHorarioSaidaM() { return $this->HorarioSaidaM; }
+        public function setHorarioSaidaM($HorarioSaidaM) { $this->HorarioSaidaM = $HorarioSaidaM; }
 
-        public function getHorarioEntradaV() { return $this->horarioEntradaV; }
-        public function setHorarioEntradaV($hora) { $this->horarioEntradaV = $hora; }
+        public function getHorarioEntradaV() { return $this->HorarioEntradaV; }
+        public function setHorarioEntradaV($HorarioEntradaV) { $this->HorarioEntradaV = $HorarioEntradaV; }
 
-        public function getHorarioSaidaV() { return $this->horarioSaidaV; }
-        public function setHorarioSaidaV($hora) { $this->horarioSaidaV = $hora; }
+        public function getHorarioSaidaV() { return $this->HorarioSaidaV; }
+        public function setHorarioSaidaV($HorarioSaidaV) { $this->HorarioSaidaV = $HorarioSaidaV; }
 
-        public function getHorarioEntradaEx() { return $this->horarioEntradaEx; }
-        public function setHorarioEntradaEx($hora) { $this->horarioEntradaEx = $hora; }
+        public function getHorarioEntradaEx() { return $this->HorarioEntradaEx; }
+        public function setHorarioEntradaEx($HorarioEntradaEx) { $this->HorarioEntradaEx = $HorarioEntradaEx; }
 
-        public function getHorarioSaidaEx() { return $this->horarioSaidaEx; }
-        public function setHorarioSaidaEx($hora) { $this->horarioSaidaEx = $hora; }
+        public function getHorarioSaidaEx() { return $this->HorarioSaidaEx; }
+        public function setHorarioSaidaEx($HorarioSaidaEx) { $this->HorarioSaidaEx = $HorarioSaidaEx; }
 
-        public function getSalarioDoDia() { return $this->salarioDoDia; }
-        public function setSalarioDoDia($salario) { $this->salarioDoDia = $salario; }
+        public function getSalarioDoDia() { return $this->SalarioDoDia; }
+        public function setSalarioDoDia($SalarioDoDia) { $this->SalarioDoDia = $SalarioDoDia; }
     }
     
 ?>

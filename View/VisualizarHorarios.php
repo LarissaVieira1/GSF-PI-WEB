@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+
+//die(var_dump($_SESSION));
+if (empty($_SESSION['cpf'])) {
+    header('Location: PontoEletronicoV.php');
+    exit;
+}
+
+$cpf = $_SESSION['cpf'];
+$ponto = array($_SESSION['pontoPassado']);
+$ponto = unserialize($ponto);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -148,17 +163,20 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody> 
-          <?php foreach ($ponto as $p): ?>
+        <tbody>
+          
+          <?php 
+          die(var_dump($ponto));
+           foreach ($ponto as $p): ?>
             <tr>
-              <td><?= date('d/m/Y', strtotime($h['dataRegistro'])) ?></td>
-              <td><?= $p['horarioEntradaM'] ?? '-' ?></td>
-              <td><?= $p['horarioSaidaM'] ?? '-' ?></td>
-              <td><?= $p['horarioEntradaV'] ?? '-' ?></td>
-              <td><?= $p['horarioSaidaV'] ?? '-' ?></td>
-              <td><?= $p['horarioEntradaEx'] ?? '-' ?></td>
-              <td><?= $p['horarioSaidaEx'] ?? '-' ?></td>
-              <td><?= $p['salarioDoDia'] ?? '-' ?></td>
+              <td><?= date('d/m/Y', strtotime($p['DataRegistro'])) ?></td>
+              <td><?= $p['HorarioEntradaM'] ?? '-' ?></td>
+              <td><?= $p['HorarioSaidaM'] ?? '-' ?></td>
+              <td><?= $p['HorarioEntradaV'] ?? '-' ?></td>
+              <td><?= $p['HorarioSaidaV'] ?? '-' ?></td>
+              <td><?= $p['HorarioEntradaEx'] ?? '-' ?></td>
+              <td><?= $p['HorarioSaidaEx'] ?? '-' ?></td>
+              <td><?= $p['SalarioDoDia'] ?? '-' ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

@@ -62,7 +62,7 @@
       align-items: center;
     }
 
-    button {
+    #button {
       padding: 10px 20px;
       width: 100px;
       margin: 5px;
@@ -74,7 +74,7 @@
       transition: all 0.3s ease-in-out;
     }
 
-    button:hover {
+    #button:hover {
       background: linear-gradient(to bottom, #f5f5f5, #d0d0d0);
       color: #333;
     }
@@ -82,15 +82,42 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="./gsf.png" class="logo">
-    <div class="inputContainer">
-      <img src="./usuario.png" class="icon">
-      <input type="text" placeholder="Digite seu CPF">
+  <?php  include_once(__DIR__."/../model/PontoEletronicoDAO.php");?>
+  <?php 
+    session_start();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $cpf_raw = $_POST['cpf'] ?? '';
+      var_dump( $cpf_raw);
+      $cpf = preg_replace('/[.\-\s]/', '', $cpf_raw);
+      $_SESSION['cpf'] = $cpf;
+      
+
+      require_once __DIR__ . '/../model/PontoEletronicoDAO.php';
+  
+      $metodos = new PontoEletronicoDAO();
+      if ($metodos->selecionar($cpf)) {
+         $pontoPassado = array($metodos->selecionar($cpf));
+         $pontoPassado = serialize($pontoPassado);
+         $_SESSION['pontoPassado'] = $pontoPassado;
+         session_write_close();  
+          header('Location: VisualizarHorarios.php');
+          exit; 
+      } else {
+          $error = "CPF não encontrado!";
+      }
+  }
+  ?>
+  <form id="Cpf" action="PontoEletronicoV.php" method="post">
+    <div class="container">
+      <img src="../imagens/gsf.png" class="logo">
+      <div class="inputContainer">
+        <img src="../imagens/usuario.png" class="icon">
+        <input type="text" name="cpf" placeholder="Digite seu CPF" value="<?= htmlspecialchars($_POST['cpf'] ?? '') ?>">
+      </div>
+      <div class="botoes">
+        <input type="submit" id="button" value="Confirmar"/>
+      </div>
     </div>
-    <div class="botoes">
-      <button>Confirmar</button>
-    </div>
-  </div>
+  </form>
 </body>
 </html>
