@@ -87,7 +87,6 @@
     session_start();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $cpf_raw = $_POST['cpf'] ?? '';
-      var_dump( $cpf_raw);
       $cpf = preg_replace('/[.\-\s]/', '', $cpf_raw);
       $_SESSION['cpf'] = $cpf;
       
@@ -95,15 +94,14 @@
       require_once __DIR__ . '/../model/PontoEletronicoDAO.php';
   
       $metodos = new PontoEletronicoDAO();
-      if ($metodos->selecionar($cpf)) {
-         $pontoPassado = array($metodos->selecionar($cpf));
-         $pontoPassado = serialize($pontoPassado);
-         $_SESSION['pontoPassado'] = $pontoPassado;
-         session_write_close();  
+      $pontos = $metodos->selecionar($cpf);
+      if ($pontos) {
+          $_SESSION['pontoPassado'] = serialize($pontos);
+          session_write_close();  
           header('Location: VisualizarHorarios.php');
           exit; 
       } else {
-          $error = "CPF não encontrado!";
+           echo "<script>alert('CPF não encontrado no sistema, digite um CPF válido!');</script>";
       }
   }
   ?>

@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+require_once '../model/PontoEletronico.php';
+include_once(__DIR__."/../model/PontoEletronicoDAO.php");
+require_once __DIR__ . '/../model/PontoEletronicoDAO.php';
 
 //die(var_dump($_SESSION));
 if (empty($_SESSION['cpf'])) {
@@ -9,8 +11,24 @@ if (empty($_SESSION['cpf'])) {
 }
 
 $cpf = $_SESSION['cpf'];
-$ponto = array($_SESSION['pontoPassado']);
-$ponto = unserialize($ponto);
+$metodo = new PontoEletronicoDAO();
+
+if (isset($_GET['mes'])) {
+    $mesSelecionado = $_GET['mes'];
+    if($_GET['mes'] === '00'){
+      $ponto = $metodo->selecionar($cpf);
+    }else{
+      $ponto = $metodo->selecionarMes($cpf, $mesSelecionado);
+      if(empty($ponto)){
+        $ponto = $metodo->selecionar($cpf);
+        echo "<script>alert('Nenhum registro encontrado para este mês!');</script>";
+      }
+    }
+    $_SESSION['pontoPassado'] = serialize($ponto);
+} else {
+    // Usa o que já estava na sessão (padrão)
+    $ponto = unserialize($_SESSION['pontoPassado']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -130,25 +148,27 @@ $ponto = unserialize($ponto);
   <div class="main">
     <div class="top-section">
       <div class="filter-bar">
-        <label for="mes">Mês:</label>
-        <select id="mes" name="mes">
-          <option value="janeiro">Janeiro</option>
-          <option value="fevereiro">Fevereiro</option>
-          <option value="marco">Março</option>
-          <option value="abril">Abril</option>
-          <option value="maio">Maio</option>
-          <option value="junho">Junho</option>
-          <option value="julho">Julho</option>
-          <option value="agosto">Agosto</option>
-          <option value="setembro">Setembro</option>
-          <option value="outubro">Outubro</option>
-          <option value="novembro">Novembro</option>
-          <option value="dezembro">Dezembro</option>
-        </select>
-        <button>Buscar</button>
+        <form method="GET" action="VisualizarHorarios.php">
+          <label for="mes">Mês:</label>
+          <select name="mes" id="mes">
+            <option value="00" <?= ($_GET['mes'] ?? '') === '00' ? 'selected' : '' ?>></option>
+            <option value="01" <?= ($_GET['mes'] ?? '') === '01' ? 'selected' : '' ?>>Janeiro</option>
+            <option value="02" <?= ($_GET['mes'] ?? '') === '02' ? 'selected' : '' ?>>Fevereiro</option>
+            <option value="03" <?= ($_GET['mes'] ?? '') === '03' ? 'selected' : '' ?>>Março</option>
+            <option value="04" <?= ($_GET['mes'] ?? '') === '04' ? 'selected' : '' ?>>Abril</option>
+            <option value="05" <?= ($_GET['mes'] ?? '') === '05' ? 'selected' : '' ?>>Maio</option>
+            <option value="06" <?= ($_GET['mes'] ?? '') === '06' ? 'selected' : '' ?>>Junho</option>
+            <option value="07" <?= ($_GET['mes'] ?? '') === '07' ? 'selected' : '' ?>>Julho</option>
+            <option value="08" <?= ($_GET['mes'] ?? '') === '08' ? 'selected' : '' ?>>Agosto</option>
+            <option value="09" <?= ($_GET['mes'] ?? '') === '09' ? 'selected' : '' ?>>Setembro</option>
+            <option value="10" <?= ($_GET['mes'] ?? '') === '10' ? 'selected' : '' ?>>Outubro</option>
+            <option value="11" <?= ($_GET['mes'] ?? '') === '11' ? 'selected' : '' ?>>Novembro</option>
+            <option value="12" <?= ($_GET['mes'] ?? '') === '12' ? 'selected' : '' ?>>Dezembro</option>
+          </select>
+          <button type="submit">Buscar</button>
+        </form>
       </div>
     </div>
-
     <div class="Tabela">
       <table>
         <thead>
@@ -164,19 +184,16 @@ $ponto = unserialize($ponto);
           </tr>
         </thead>
         <tbody>
-          
-          <?php 
-          die(var_dump($ponto));
-           foreach ($ponto as $p): ?>
+          <?php foreach ($ponto as $p): ?>
             <tr>
-              <td><?= date('d/m/Y', strtotime($p['DataRegistro'])) ?></td>
-              <td><?= $p['HorarioEntradaM'] ?? '-' ?></td>
-              <td><?= $p['HorarioSaidaM'] ?? '-' ?></td>
-              <td><?= $p['HorarioEntradaV'] ?? '-' ?></td>
-              <td><?= $p['HorarioSaidaV'] ?? '-' ?></td>
-              <td><?= $p['HorarioEntradaEx'] ?? '-' ?></td>
-              <td><?= $p['HorarioSaidaEx'] ?? '-' ?></td>
-              <td><?= $p['SalarioDoDia'] ?? '-' ?></td>
+              <td><?= date('d/m/Y', strtotime($p->getDataRegistro())) ?></td>
+              <td><?= $p->getHorarioEntradaM() ?? '' ?></td>
+              <td><?= $p->getHorarioSaidaM() ?? '' ?></td>
+              <td><?= $p->getHorarioEntradaV() ?? '' ?></td>
+              <td><?= $p->getHorarioSaidaV() ?? '' ?></td>
+              <td><?= $p->getHorarioEntradaEx() ?? '' ?></td>
+              <td><?= $p->getHorarioSaidaEx() ?? '' ?></td>
+              <td><?= $p->getSalarioDoDia() ?? '' ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

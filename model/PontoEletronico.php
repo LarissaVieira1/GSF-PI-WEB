@@ -10,34 +10,31 @@
         private $HorarioEntradaEx;
         private $HorarioSaidaEx;
         private $SalarioDoDia;
+         
+        public function __construct($Cpf, $DataRegistro, $HorarioEntradaM = null, $HorarioSaidaM = null, $HorarioEntradaV = null,
+          $HorarioSaidaV = null, $HorarioEntradaEx = null, $HorarioSaidaEx = null, $SalarioDoDia = 0.0){
+            $this->Cpf = $Cpf;
+            $this->DataRegistro = $DataRegistro;
+            $this->HorarioEntradaM = $HorarioEntradaM;
+            $this->HorarioSaidaM = $HorarioSaidaM;
+            $this->HorarioEntradaV = $HorarioEntradaV;
+            $this->HorarioSaidaV = $HorarioSaidaV;
+            $this->HorarioEntradaEx = $HorarioEntradaEx;
+            $this->HorarioSaidaEx = $HorarioSaidaEx;
+            $this->SalarioDoDia = $SalarioDoDia;
+        }
 
-        // Getters e Setters
+        // Getters
         public function getCpf() { return $this->Cpf; }
-        public function setCpf($Cpf) { $this->Cpf = $Cpf; }
-
         public function getDataRegistro() { return $this->DataRegistro; }
-        public function setDataRegistro($DataRegistro) { $this->DataRegistro = $DataRegistro; }
-
         public function getHorarioEntradaM() { return $this->HorarioEntradaM; }
-        public function setHorarioEntradaM($HorarioEntradaM) { $this->HorarioEntradaM = $HorarioEntradaM; }
-
         public function getHorarioSaidaM() { return $this->HorarioSaidaM; }
-        public function setHorarioSaidaM($HorarioSaidaM) { $this->HorarioSaidaM = $HorarioSaidaM; }
-
         public function getHorarioEntradaV() { return $this->HorarioEntradaV; }
-        public function setHorarioEntradaV($HorarioEntradaV) { $this->HorarioEntradaV = $HorarioEntradaV; }
-
         public function getHorarioSaidaV() { return $this->HorarioSaidaV; }
-        public function setHorarioSaidaV($HorarioSaidaV) { $this->HorarioSaidaV = $HorarioSaidaV; }
-
         public function getHorarioEntradaEx() { return $this->HorarioEntradaEx; }
-        public function setHorarioEntradaEx($HorarioEntradaEx) { $this->HorarioEntradaEx = $HorarioEntradaEx; }
-
         public function getHorarioSaidaEx() { return $this->HorarioSaidaEx; }
-        public function setHorarioSaidaEx($HorarioSaidaEx) { $this->HorarioSaidaEx = $HorarioSaidaEx; }
-
         public function getSalarioDoDia() { return $this->SalarioDoDia; }
-        public function setSalarioDoDia($SalarioDoDia) { $this->SalarioDoDia = $SalarioDoDia; }
+        
     }
     
 ?>

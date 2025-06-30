@@ -1,12 +1,11 @@
 <?php 
-    include_once 'ConexaoBD.php';
-    include_once 'PontoEletronico.php';
+    require_once '../model/ConexaoBD.php';
+    require_once '../model/PontoEletronico.php';
     class PontoEletronicoDAO {
 
         private $pdo;
     
         function __construct() {
-            
             $this->pdo = ConexaoBD::getConexao();
         }
     
@@ -15,13 +14,33 @@
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindValue(':cpf', $cpf);
             $stmt->execute();
-        
-        $dados = $stmt->fetchALL(PDO::FETCH_ASSOC);
-    //  die(var_dump($dados));
+            $dados = $stmt->fetchALL(PDO::FETCH_ASSOC);
             if (count($dados) > 0) {
                 //Array de Pontos
                 $ponto=[];
-               // die(var_dump($dados));
+
+                //foreach para colocar dados no array de ponto
+                foreach($dados as $linha){
+                    $p = new PontoEletronico($linha['Cpf'],$linha['DataRegistro'],$linha['HorarioEntradaM'],$linha['HorarioSaidaM'],$linha['HorarioEntradaV'],
+                    $linha['HorarioSaidaV'],$linha['HorarioEntradaEx'],$linha['HorarioSaidaEx'],$linha['SalarioDoDia']);
+                    array_push($ponto, $p);
+                }
+                return $ponto;
+            } else {
+                return null; // CPF não encontrado
+            }
+        }
+
+        public function selecionarMes($cpf, $Mes){
+            $sql = "SELECT * FROM registrohora WHERE cpf = :cpf AND MONTH(DataRegistro) = :Mes";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':cpf', $cpf);
+            $stmt->bindValue(':Mes', $Mes);
+            $stmt->execute();
+            $dados = $stmt->fetchALL(PDO::FETCH_ASSOC);
+            if (count($dados) > 0) {
+                //Array de Pontos
+                $ponto=[];
 
                 //foreach para colocar dados no array de ponto
                 foreach($dados as $linha){
