@@ -180,7 +180,7 @@ if (isset($_GET['mes'])) {
             <th>Saída</th>
             <th>Entrada</th>
             <th>Saída</th>
-            <th>Total</th>
+            <th>Salário Diário</th>
           </tr>
         </thead>
         <tbody>
